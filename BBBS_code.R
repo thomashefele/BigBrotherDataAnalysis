@@ -100,7 +100,6 @@ dates <- function(data, t_goal, p_m, b_or_l) {
           new_data <- rbind(new_data, new_line)
         }
       }
-      cat(paste("There are", i, "big booties in your face. Oh, and completion %:", 100*(i/R), "\r"))
     }
   } else if (b_or_l == "l") {
     for (i in 1:R) {
@@ -148,7 +147,6 @@ dates <- function(data, t_goal, p_m, b_or_l) {
         min_del <- c()
         init <- i
       }
-      cat(paste("There are", i, "big booties in your face. Oh, and completion %:", 100*(i/R), "\r"))
     }
   }
   return(new_data)
