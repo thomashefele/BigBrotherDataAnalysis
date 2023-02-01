@@ -185,6 +185,9 @@ merge_sorl <- merge(sorl_by_date, data_MH, by= "Match.ID")
 race_match <- function(data, b_or_l) {
   R <- nrow(data)
   yn <- c()
+    
+  data[`Little: Race/Ethnicity`][data[`Little: Race/Ethnicity`] != ("White" | "Black" | "Hispanic")] <- "Multi-racial"
+  data[`Primary Big: Race/Ethnicity`][data[`Primary Big: Race/Ethnicity`] != ("White" | "Black" | "Hispanic")] <- "Multi-racial"
   
   if (b_or_l == "b") {
     for (i in 1:R) {
