@@ -1,3 +1,4 @@
+#command to run in R: source("/Applications/Coding/R/BBBS_code.R", echo=TRUE)
 #necessary libraries
 library(readxl)
 library(tidyverse)
@@ -100,6 +101,7 @@ dates <- function(data, t_goal, p_m, b_or_l) {
           new_data <- rbind(new_data, new_line)
         }
       }
+      cat(paste("There are", i, "big booties in your face. Oh, and completion %:", 100*(i/R), "\r"))
     }
   } else if (b_or_l == "l") {
     for (i in 1:R) {
@@ -147,6 +149,7 @@ dates <- function(data, t_goal, p_m, b_or_l) {
         min_del <- c()
         init <- i
       }
+      cat(paste("There are", i, "big booties in your face. Oh, and completion %:", 100*(i/R), "\r"))
     }
   }
   return(new_data)
@@ -181,14 +184,34 @@ for (i in 1:nrow(sorb_by_date)) {
 merge_sorb <- merge(sorb_by_date, data_MH, by= "Match.ID")
 merge_sorl <- merge(sorl_by_date, data_MH, by= "Match.ID")
 
+#change race parameters as desired
+race_change <- function(r_list, idx, pos) {
+  r <- "Other"
+  boo <- 0
+  race <- c("White", "Black", "Hispanic")
+  multi_r <- "Multi-Race"
+  
+  if (length(grep(multi_r, r_list[idx,pos], ignore.case= TRUE)) != 0) {
+    r <- "Multiracial"
+  } else if (length(grep("White", r_list[idx,pos], ignore.case= TRUE)) != 0) {
+    r <- "White"
+  } else if (length(grep("Black", r_list[idx,pos], ignore.case= TRUE)) != 0) {
+    r <- "Black"
+  } else if (length(grep("Hispanic", r_list[idx,pos], ignore.case= TRUE)) != 0) {
+    r <- "Hispanic"
+  }
+  
+  return(r)
+}
+
 #test if little and big race/ethnicity matches; return a column vector of Boolean values (i.e. 1 = yes, 0 = no)
-race_match <- function(data, b_or_l) {
+race_match <- function(data, b_or_l, idx1, idx2) {
   R <- nrow(data)
   yn <- c()
   
   if (b_or_l == "b") {
     for (i in 1:R) {
-      if (identical(data[i,36], data[i,40])) {
+      if (identical(data[i,idx1], data[i,idx2])) {
         yn <- append(yn, 1)
       } else {
         yn <- append(yn, 0)
@@ -196,7 +219,7 @@ race_match <- function(data, b_or_l) {
     }
   } else if (b_or_l == "l") {
     for (i in 1:R) {
-      if (identical(data[i,26], data[i,30])) {
+      if (identical(data[i,idx1], data[i,idx2])) {
         yn <- append(yn, 1)
       } else {
         yn <- append(yn, 0)
@@ -206,8 +229,21 @@ race_match <- function(data, b_or_l) {
   return (yn)
 }
 
-final_sorb <- cbind(merge_sorb, `Racial/Ethnic Match`= race_match(merge_sorb, "b"))
-final_sorl <- cbind(merge_sorl, `Racial/Ethnic Match`= race_match(merge_sorl, "l"))
+Rb <- nrow(merge_sorb)
+Rl <- nrow(merge_sorl)
+
+for (i in 1:Rb){
+  for (j in list(36, 40))
+    merge_sorb[i,j] <- race_change(merge_sorb, i, j)
+}
+
+for (i in 1:Rl){
+  for (j in list(26, 30))
+    merge_sorl[i,j] <- race_change(merge_sorl, i, j)
+}
+
+final_sorb <- cbind(merge_sorb, `Racial/Ethnic Match`= race_match(merge_sorb, "b", 36, 40))
+final_sorl <- cbind(merge_sorl, `Racial/Ethnic Match`= race_match(merge_sorl, "l", 26, 30))
 
 #export to csv files
 write_csv(final_sorb, "SORB_formatted.csv")
