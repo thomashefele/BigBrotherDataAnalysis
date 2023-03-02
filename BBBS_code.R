@@ -100,7 +100,7 @@ dates <- function(data, t_goal, p_m, b_or_l) {
           new_data <- rbind(new_data, new_line)
         }
       }
-      cat(paste("There are", i, "big booties in your face. Oh, and completion %:", 100*(i/R), "\r"))
+      cat(paste("Completion %:", round(100*(i/R)), "% \r"))
     }
   } else if (b_or_l == "l") {
     for (i in 1:R) {
@@ -148,7 +148,7 @@ dates <- function(data, t_goal, p_m, b_or_l) {
         min_del <- c()
         init <- i
       }
-      cat(paste("There are", i, "big booties in your face. Oh, and completion %:", 100*(i/R), "\r"))
+      cat(paste("Completion %:", round(100*(i/R)), "% \r"))
     }
   }
   return(new_data)
@@ -247,8 +247,8 @@ for (i in 1:Rl){
     merge_sorl[i,j] <- race_change(merge_sorl, i, j)
 }
 
-final_sorb <- cbind(merge_sorb, `Racial/Ethnic Match:`= race_match(merge_sorb, "b", 36, 40), `Length of Match:`= tb_l)
-final_sorl <- cbind(merge_sorl, `Racial/Ethnic Match:`= race_match(merge_sorl, "l", 26, 30), `Length of Match:`= tl_l)
+final_sorb <- cbind(merge_sorb, `Racial/Ethnic Match:`= round(race_match(merge_sorb, "b", 36, 40)), `Length of Match:`= tb_l)
+final_sorl <- cbind(merge_sorl, `Racial/Ethnic Match:`= round(race_match(merge_sorl, "l", 26, 30)), `Length of Match:`= tl_l)
 
 #export to csv files
 write_csv(final_sorb, "SORB_formatted.csv")
