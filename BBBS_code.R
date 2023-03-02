@@ -1,4 +1,3 @@
-#command to run in R: source("/Applications/Coding/R/BBBS_code.R", echo=TRUE)
 #necessary libraries
 library(readxl)
 library(tidyverse)
@@ -231,19 +230,25 @@ race_match <- function(data, b_or_l, idx1, idx2) {
 
 Rb <- nrow(merge_sorb)
 Rl <- nrow(merge_sorl)
+tb_l <- c()
+tl_l <- c()
 
 for (i in 1:Rb){
+  tb_l <- append(tb_l, difftime(merge_sorb[i,18], merge_sorb[i,2], units= "weeks"))
+  
   for (j in list(36, 40))
     merge_sorb[i,j] <- race_change(merge_sorb, i, j)
 }
 
 for (i in 1:Rl){
+  tl_l = append(tl_l, difftime(merge_sorl[i,13], merge_sorl[i,2], units= "weeks"))
+  
   for (j in list(26, 30))
     merge_sorl[i,j] <- race_change(merge_sorl, i, j)
 }
 
-final_sorb <- cbind(merge_sorb, `Racial/Ethnic Match`= race_match(merge_sorb, "b", 36, 40))
-final_sorl <- cbind(merge_sorl, `Racial/Ethnic Match`= race_match(merge_sorl, "l", 26, 30))
+final_sorb <- cbind(merge_sorb, `Racial/Ethnic Match:`= race_match(merge_sorb, "b", 36, 40), `Length of Match:`= tb_l)
+final_sorl <- cbind(merge_sorl, `Racial/Ethnic Match:`= race_match(merge_sorl, "l", 26, 30), `Length of Match:`= tl_l)
 
 #export to csv files
 write_csv(final_sorb, "SORB_formatted.csv")
