@@ -9,15 +9,15 @@ This program mines data from Big Brother/Big Sister surveys to compare the surve
 - Order a Match History Detail date sheet by "Match ID" alphabetically.
 - Run the program in a R notebook. You will be prompted several separate times:
   - First, to enter the pathway of the SOR file:
- 
+  - 
   <img width="1175" alt="BBBS1" src="https://user-images.githubusercontent.com/116929892/223919531-6f992b32-2be7-44fe-aad1-777e85b030e3.png">
 
   - Second, to enter the pathway of the Match History file:
- 
+  - 
   <img width="1174" alt="BBBS2" src="https://user-images.githubusercontent.com/116929892/223919503-89060560-fc8f-438b-b26c-75b0cf7993e5.png">
   
   - Lastly, to enter the time interval of interest for comparison of survey scores to the baseline (+/- a user-stated deviation):
- 
+  - 
   <img width="1175" alt="BBBS3" src="https://user-images.githubusercontent.com/116929892/223919473-6da0430b-981d-4b1c-aa85-e84baf110337.png">
   
-Afterwards, your work is done! The program will now sift through the data to produce a file of all cases with completed surveys at both the baseline and the target time interval, along with whether or not a racial or ethnic match occured in each case.
+Afterwards, your work is done! The program will now sift through the data to produce CSV files (one for the big, one for the little) of all cases with completed surveys at both the baseline and the target time interval, along with whether or not a racial or ethnic match occured in each case.
