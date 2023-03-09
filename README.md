@@ -1,5 +1,5 @@
 # Big Brother/Big Sister Mentor-Mentee Research Project
-A computer program for performing data analysis on the effects of racial and ethnic match on mentor-mentee relationships in the Big Brother/Big Sister organization. Done in support of Jennifer Koide's PhD research thesis "Effects of Ethnic–Racial Identity on Strength of Mentorship Relationships."
+A computer program for performing data analysis on the effects of racial and ethnic match on mentor-mentee relationships in the Big Brother/Big Sister organization. Done in support of Jennifer Koide's PhD research thesis "Effects of Ethnic–Racial (Mis)Match on Strength of Mentorship Relationships."
 
 This program mines data from Big Brother/Big Sister surveys to compare the survey scores between the baseline and a target interval of interest. From this data mining, the program also compares the racial and ethnic identities of the big sibling to the little sibling to determine if there is a racial/ethnic match or not.
 
