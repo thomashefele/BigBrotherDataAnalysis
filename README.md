@@ -6,7 +6,7 @@ This program mines data from Big Brother/Big Sister surveys to compare the surve
 ## Use:
 
 - Order a SOR (Strength of Relationship) data sheet first by "Match ID" alphabetically and then by Completion Date (from earliest date to latest)
-- Order a Match History Detail date sheet by "Match ID" alphabetically.
+- Order a Match History Detail data sheet by "Match ID" alphabetically.
 - Run the program in a R notebook. You will be prompted several separate times:
   
   First, to enter the pathway of the SOR file:
